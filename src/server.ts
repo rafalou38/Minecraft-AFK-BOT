@@ -1,26 +1,31 @@
 import * as sapper from "@sapper/server";
 import compression from "compression";
 import express from "express";
-import mongoose from "mongoose";
 import sirv from "sirv";
 import authRoutes from "./auth-routes";
-import { mongodb } from "./config/keys";
 import "./config/passport-setup";
+import "./config/mongoose-setup";
+
+import cookieSession from "cookie-session";
+import { session } from "./config/keys";
+import passport from "passport";
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === "development";
 
-const app = express(); // You can also use Express
+const app = express();
+
+// TODO use mongo db for session => express-sessions
+app.use(
+	cookieSession({
+		maxAge: 7 * 24 * 60 * 60 * 1000,
+		keys: [session.cookieKey],
+	})
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api/auth", authRoutes);
-
-mongoose.connect(
-	mongodb.dbURI,
-	{ useNewUrlParser: true, useUnifiedTopology: true },
-	() => {
-		console.log("connected to MongoDB ✅");
-	}
-);
 
 app.use(
 	compression({ threshold: 0 }),

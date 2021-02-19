@@ -4,14 +4,14 @@ export interface IUser extends mongoose.Document {
 	email: string;
 	username: string;
 	auth_type: "google" | "email" | "facebook" | "microsoft";
-	id: string;
+	strategy_id: string;
 }
 
 export const UserSchema = new mongoose.Schema({
 	username: String,
 	auth_type: String,
 	email: String,
-	id: String,
+	strategy_id: String,
 });
 
 const User = mongoose.model<IUser>("User", UserSchema);
