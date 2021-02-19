@@ -47,6 +47,7 @@
 		font-size: 15px;
 		color: white;
 		font-family: roboto;
+		cursor: pointer;
 		margin-bottom: 10px;
 		:global(p) {
 			margin: 0;
