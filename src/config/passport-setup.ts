@@ -7,9 +7,9 @@ passport.serializeUser((user: IUser, done) => {
 	done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-	User.findById(id).then((user) => {
-		done(null, user);
+passport.deserializeUser(async (id, done) => {
+	done(null, async () => {
+		return await User.findById(id).exec();
 	});
 });
 
