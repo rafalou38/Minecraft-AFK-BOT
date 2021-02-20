@@ -1,3 +1,7 @@
+console.log(
+	"\n".repeat(5) + "─".repeat(15) + "┤ app started ├" + "─".repeat(15)
+);
+
 import * as sapper from "@sapper/server";
 import compression from "compression";
 import express from "express";
@@ -9,11 +13,14 @@ import "./config/mongoose-setup";
 import cookieSession from "cookie-session";
 import { session } from "./config/keys";
 import passport from "passport";
+var morgan = require("morgan");
 
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === "development";
 
 const app = express();
+
+app.use(morgan("dev"));
 
 // TODO use mongo db for session => express-sessions
 app.use(
@@ -33,8 +40,6 @@ app.use(
 	sapper.middleware()
 );
 
-app.listen(PORT, () => {
-	console.log(`Listening on port: http://localhost:${PORT}`);
-}).on("error", (e) => {
-	console.log("Error happened: ", e.message);
+app.listen(PORT).on("error", (e) => {
+	console.log("Express error happened: ", e.message);
 });
