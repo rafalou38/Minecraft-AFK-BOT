@@ -37,7 +37,11 @@ app.use("/api/auth", authRoutes);
 app.use(
 	compression({ threshold: 0 }),
 	sirv("static", { dev }),
-	sapper.middleware()
+	sapper.middleware({
+		session: (req) => {
+			return { user_id: req?.user };
+		},
+	})
 );
 
 app.listen(PORT).on("error", (e) => {

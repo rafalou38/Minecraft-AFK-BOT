@@ -1,16 +1,15 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as FacebookStrategy } from "passport-facebook";
 import User, { IUser } from "../models/user-model";
-import { google } from "./keys";
+import { google, facebook } from "./keys";
 
 passport.serializeUser((user: IUser, done) => {
 	done(null, user.id);
 });
 
-passport.deserializeUser(async (id, done) => {
-	done(null, async () => {
-		return await User.findById(id).exec();
-	});
+passport.deserializeUser((id, done) => {
+	done(null, id);
 });
 
 passport.use(
@@ -26,7 +25,6 @@ passport.use(
 				strategy_id: profile.id,
 			}).then((currentUser) => {
 				if (currentUser) {
-					console.log(`user is`, currentUser);
 					done(null, currentUser);
 				} else {
 					new User({
@@ -37,11 +35,42 @@ passport.use(
 					})
 						.save()
 						.then((newUser) => {
-							console.log("new User created:", newUser.username);
 							done(null, newUser);
 						});
 				}
 			});
+		}
+	)
+);
+
+passport.use(
+	new FacebookStrategy(
+		{
+			callbackURL: "http://localhost:3000/api/auth/facebook/redirect/",
+			clientID: facebook.clientID,
+			clientSecret: facebook.clientSecret,
+		},
+		function (_accessToken, _refreshToken, profile, done) {
+			User.findOne({
+				auth_type: "facebook",
+				strategy_id: profile.id,
+			}).then((currentUser) => {
+				if (currentUser) {
+					done(null, currentUser);
+				} else {
+					new User({
+						username: profile.displayName,
+						strategy_id: profile.id,
+						email: profile.emails ? profile.emails[0].value : null,
+						auth_type: "facebook",
+					})
+						.save()
+						.then((newUser) => {
+							done(null, newUser);
+						});
+				}
+			});
+			console.log(profile);
 		}
 	)
 );

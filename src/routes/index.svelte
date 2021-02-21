@@ -1,6 +1,13 @@
-<script>
+<script lang="ts">
+	import { onMount } from "svelte";
 	import Button, { Label } from "@smui/button";
-	import Textfield from "@smui/textfield";
+	import { fetchJson } from "../helpers";
+	let user;
+	onMount(() =>
+		fetchJson("/getUserData").then((data) => {
+			user = data;
+		})
+	);
 </script>
 
 <svelte:head>
@@ -19,6 +26,9 @@
 		<Button href="/auth/login" variant="raised"><Label>Join!</Label></Button
 		>
 	</div>
+	<pre>
+		{JSON.stringify(user)}
+	</pre>
 </div>
 
 <style lang="scss">

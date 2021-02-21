@@ -1,5 +1,13 @@
 <script lang="ts">
-	export let segment: string;
+	import { stores } from "@sapper/app";
+	import { onMount } from "svelte";
+
+	const { session } = stores();
+
+	let user;
+	onMount(() => {
+		user = $session.user_id || "no user";
+	});
 </script>
 
 <nav>
@@ -8,10 +16,11 @@
 	</div>
 	<ul>
 		<li>
-			<a
-				aria-current={segment === "auth" ? "page" : undefined}
-				href="auth/login">login</a
-			>
+			{#if user === "no user"}
+				<a href="/auth/login">login</a>
+			{:else}
+				<a href="/api/auth/logout" />
+			{/if}
 		</li>
 	</ul>
 </nav>
