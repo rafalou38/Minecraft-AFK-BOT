@@ -19,7 +19,6 @@
 		<Button href="/auth/login" variant="raised"><Label>Join!</Label></Button
 		>
 	</div>
-	<Textfield ></Textfield>
 </div>
 
 <style lang="scss">
