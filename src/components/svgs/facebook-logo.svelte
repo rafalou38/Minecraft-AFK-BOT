@@ -1,30 +1,25 @@
-<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-	<defs id="defs4732">
-		<clipPath clipPathUnits="userSpaceOnUse" id="clipPath4674">
-			<path d="M 0,500 1024,500 1024,0 0,0 0,500 Z" id="path4676" />
-		</clipPath>
-	</defs>
-	<g transform="translate(-33.466291,-429.48076)" id="layer1">
-		<g
-			transform="matrix(1.1165523,0,0,-1.1165523,-103.48743,863.08638)"
-			id="g4670"
-		>
-			<g id="g4672" clip-path="url(#clipPath4674)">
-				<g id="g4678" transform="translate(375.7163,120.5527)">
-					<path
-						d="m 0,0 c 8.134,0 14.73,6.596 14.73,14.73 l 0,237.434 c 0,8.137 -6.596,14.731 -14.73,14.731 l -237.433,0 c -8.137,0 -14.73,-6.594 -14.73,-14.731 l 0,-237.434 c 0,-8.134 6.593,-14.73 14.73,-14.73 L 0,0 Z"
-						style="fill:#3b5998;fill-opacity:1;fill-rule:nonzero;stroke:none"
-						id="path4680"
-					/>
-				</g>
-				<g id="g4682" transform="translate(307.7046,120.5527)">
-					<path
-						d="m 0,0 0,103.355 34.693,0 5.194,40.28 -39.887,0 0,25.717 c 0,11.662 3.238,19.609 19.962,19.609 l 21.33,0.01 0,36.026 c -3.69,0.49 -16.351,1.587 -31.081,1.587 -30.753,0 -51.806,-18.771 -51.806,-53.244 l 0,-29.705 -34.781,0 0,-40.28 34.781,0 L -41.595,0 0,0 Z"
-						style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none"
-						id="path4684"
-					/>
-				</g>
-			</g>
-		</g>
-	</g>
-</svg>
+<div>
+	<svg
+		baseProfile="tiny"
+		xmlns="http://www.w3.org/2000/svg"
+		width="25px"
+		height="25px"
+		viewBox="0 0 36 36"
+	>
+		<defs />
+		<rect fill="#3B5998" width="36" height="36" />
+		<path
+			fill="#FFFFFF"
+			d="M30.895,16.535l-0.553,5.23h-4.181v15.176h-6.28V21.766H16.75v-5.23h3.131v-3.149  c0-4.254,1.768-6.796,6.796-6.796h4.181v5.23h-2.615c-1.952,0-2.081,0.736-2.081,2.1v2.615H30.895z"
+		/>
+	</svg>
+</div>
+
+<style>
+	div {
+		width: 40px;
+		height: 40px;
+		display: grid;
+		place-items: center;
+	}
+</style>

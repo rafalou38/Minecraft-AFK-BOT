@@ -1,50 +1,47 @@
 <script>
-	import successkid from 'images/successkid.jpg';
+	import Button, { Label } from "@smui/button";
+	import Textfield from "@smui/textfield";
 </script>
-
-<style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
-
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
-</style>
 
 <svelte:head>
 	<title>Sapper project template</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<div class="bg" />
+<div class="container">
+	<h1>Minecraft AFKBot</h1>
+	<p>
+		free bots for afk command execution or daily connection <span
+			>or for troll 😉</span
+		>
+	</p>
+	<div class="btn-container">
+		<Button href="/auth/login" variant="raised"><Label>Join!</Label></Button
+		>
+	</div>
+	<Textfield ></Textfield>
+</div>
 
-<figure>
-	<img alt="Success Kid" src="{successkid}">
-	<figcaption>Have fun with Sapper!</figcaption>
-</figure>
+<style lang="scss">
+	.btn-container {
+		width: 100%;
+		margin: 30px;
+		display: flex;
+		justify-content: center;
+	}
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+	.bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+
+		width: 100%;
+		height: 100%;
+
+		background-image: url(images/bot-run.png);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+</style>

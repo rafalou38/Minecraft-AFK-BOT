@@ -1,9 +1,21 @@
 <script>
-	import Logo from "../svgs/google-logo.svelte";
+	import Logo from "../svgs/facebook-logo.svelte";
 	import BasicButton from "./basic_button.svelte";
+	export let href = undefined;
 </script>
 
-<BasicButton bg_color="#4285f4">
+<BasicButton
+	bg_color="#ffffff00"
+	{href}
+	color="#000000"
+	border="2px solid #8D8D8D"
+>
 	<Logo />
-	<p>login with google</p>
+	<p>login with Microsoft</p>
 </BasicButton>
+
+<style>
+	p {
+		font-weight: 400;
+	}
+</style>
