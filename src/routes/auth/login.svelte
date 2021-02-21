@@ -18,12 +18,6 @@
 		<FacebookButton href="/api/auth/facebook" />
 	</div>
 	<Divider width="300px">or</Divider>
-	<!-- <form action="/api/auth/local">
-		<Textfield type="email" label="Email" />
-		<Textfield label="Username" />
-		<Textfield type="password" label="Password" />
-	</form> -->
-	<Textfield textarea label="Comment" />
 </div>
 
 <style>
