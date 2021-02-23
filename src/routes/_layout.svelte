@@ -11,7 +11,7 @@
 	<slot />
 </main>
 
-<style lang="scss">
+<style lang="scss" global>
 	main {
 		position: relative;
 		background-color: white;
@@ -20,12 +20,12 @@
 		display: flex;
 		flex-direction: column;
 	}
-	:global(#sapper) {
+	#sapper {
 		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
 
-		:global(.container) {
+		.container {
 			position: relative;
 			display: flex;
 			align-items: center;
@@ -42,12 +42,9 @@
 			padding: 50px;
 
 			background-color: white;
-			h1 {
-				font-size: 2em;
-				text-transform: uppercase;
-				font-weight: 700;
-				margin: 0 0 0.5em 0;
-				margin-top: 30px;
+			&-full {
+				width: 100%;
+				max-width: none;
 			}
 			p {
 				margin: 1em auto;
