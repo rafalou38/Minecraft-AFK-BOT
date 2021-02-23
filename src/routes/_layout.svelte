@@ -1,10 +1,11 @@
 <script lang="ts">
 	import Nav from "../components/Nav.svelte";
+	import { connected } from "./_stores";
 
-	export let segment: string;
+	connected.init();
 </script>
 
-<Nav {segment} />
+<Nav />
 
 <main>
 	<slot />

@@ -1,13 +1,5 @@
 <script lang="ts">
-	import { stores } from "@sapper/app";
-	import { onMount } from "svelte";
-
-	const { session } = stores();
-
-	let user;
-	onMount(() => {
-		user = $session.user_id || "no user";
-	});
+	import { connected } from "../routes/_stores";
 </script>
 
 <nav>
@@ -16,10 +8,10 @@
 	</div>
 	<ul>
 		<li>
-			{#if user === "no user"}
-				<a href="/auth/login">login</a>
+			{#if $connected}
+				<a href="/api/auth/logout">logout</a>
 			{:else}
-				<a href="/api/auth/logout" />
+				<a href="/auth/login">login</a>
 			{/if}
 		</li>
 	</ul>

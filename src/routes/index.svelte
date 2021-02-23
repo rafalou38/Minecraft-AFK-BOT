@@ -1,13 +1,6 @@
 <script lang="ts">
-	import { onMount } from "svelte";
 	import Button, { Label } from "@smui/button";
-	import { fetchJson } from "../helpers";
-	let user;
-	onMount(() =>
-		fetchJson("/getUserData").then((data) => {
-			user = data;
-		})
-	);
+	import { user, connected } from "./_stores";
 </script>
 
 <svelte:head>
@@ -27,7 +20,9 @@
 		>
 	</div>
 	<pre>
-		{JSON.stringify(user)}
+		{JSON.stringify($user, undefined, 2)}
+		{JSON.stringify($connected)}
+
 	</pre>
 </div>
 
