@@ -40,7 +40,7 @@
 		"@tsconfig/svelte": "^1.0.10",
 		"@types/compression": "^1.7.0",
 		"@types/morgan": "^1.9.2",
-		"@types/node": "^14.11.1",
+		"@types/node": "^14.14.31",
 		"@types/passport": "^1.0.6",
 		"@types/passport-google-oauth20": "^2.0.6",
 		"@types/polka": "^0.5.1",
