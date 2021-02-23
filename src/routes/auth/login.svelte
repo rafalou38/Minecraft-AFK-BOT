@@ -1,6 +1,4 @@
 <script>
-	import Textfield from "@smui/textfield";
-
 	import GoogleButton from "../../components/buttons/google.svelte";
 	import MicrosoftButton from "../../components/buttons/microsoft.svelte";
 	import FacebookButton from "../../components/buttons/facebook.svelte";
