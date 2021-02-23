@@ -12,7 +12,7 @@
 	<p>Chose your favorite way of login</p>
 	<div class="btn-container">
 		<GoogleButton href="/api/auth/google" />
-		<MicrosoftButton href="/api/auth/microsoft" />
+		<!-- <MicrosoftButton href="/api/auth/microsoft" /> -->
 		<FacebookButton href="/api/auth/facebook" />
 	</div>
 	<Divider width="300px">or</Divider>
