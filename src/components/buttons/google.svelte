@@ -11,7 +11,7 @@
 	border="2px solid #8D8D8D"
 >
 	<Logo />
-	<p>login with Microsoft</p>
+	<p>login with Google</p>
 </BasicButton>
 
 <style>
