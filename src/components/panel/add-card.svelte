@@ -22,7 +22,7 @@
 		background: #e9e9e9;
 		border-radius: 10px;
 
-		font-family: Roboto;
+		font-family: "Roboto", Arial, Helvetica, sans-serif;
 		font-weight: 500;
 		text-align: center;
 		line-height: 1;

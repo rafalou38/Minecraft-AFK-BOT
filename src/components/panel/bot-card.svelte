@@ -14,62 +14,67 @@
 	};
 </script>
 
-<div class="card" use:Ripple={{ ripple: true, color: "surface" }}>
-	<h3 class="primary">{bot.name}</h3>
-	<p class="secondary">{bot.ip}</p>
-	<p class="secondary" title={bot.status.label}>
-		<span class="dot" style="background-color: {bot.status.color}" />
-		{bot.username}
-	</p>
+<a href="/panel/bot/{bot.id}">
+	<div class="card" use:Ripple={{ ripple: true, color: "surface" }}>
+		<h3 class="primary">{bot.name}</h3>
+		<p class="secondary">{bot.ip}</p>
+		<p class="secondary" title={bot.status.label}>
+			<span class="dot" style="background-color: {bot.status.color}" />
+			{bot.username}
+		</p>
 
-	<img
-		class="avatar"
-		src="https://mc-heads.net/avatar/{bot.username}"
-		alt="{bot.username}'s head"
-	/>
-
-	<div class="hearts">
-		<span
-			class="iconify heart"
-			data-icon={bot.health >= 1 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 2 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 3 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 4 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 5 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 6 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 7 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 8 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 9 ? "mdi:heart" : "mdi:heart-outline"}
-		/><span
-			class="iconify heart"
-			data-icon={bot.health >= 10 ? "mdi:heart" : "mdi:heart-outline"}
+		<img
+			class="avatar"
+			src="https://mc-heads.net/avatar/{bot.username}"
+			alt="{bot.username}'s head"
 		/>
-		<span>
-			{bot.health}/10
-		</span>
+
+		<div class="hearts">
+			<span
+				class="iconify heart"
+				data-icon={bot.health >= 1 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 2 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 3 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 4 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 5 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 6 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 7 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 8 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 9 ? "mdi:heart" : "mdi:heart-outline"}
+			/><span
+				class="iconify heart"
+				data-icon={bot.health >= 10 ? "mdi:heart" : "mdi:heart-outline"}
+			/>
+			<span>
+				{bot.health}/10
+			</span>
+		</div>
+		<p class="primary">
+			position: <span class="secondary">{bot.position}</span>
+		</p>
 	</div>
-	<p class="primary">
-		position: <span class="secondary">{bot.position}</span>
-	</p>
-</div>
+</a>
 
 <style lang="scss">
+	a {
+		display: contents;
+	}
 	.card {
 		position: relative;
 
@@ -84,7 +89,7 @@
 		background: #e9e9e9;
 		border-radius: 10px;
 
-		font-family: Roboto;
+		font-family: "Roboto", Arial, Helvetica, sans-serif;
 		font-weight: 500;
 		text-align: center;
 
