@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
-import IUser from "./user-model";
+
 export interface IBot extends mongoose.Document {
 	name: string;
 	ip: string;
-	id: string;
 	username: string;
-	health: Int32Array;
+	health: number;
 	position: string;
-	owner: User;
+	owner: string;
 	status: {
 		color: string;
 		label: string;
@@ -17,10 +16,10 @@ export interface IBot extends mongoose.Document {
 export const BotSchema = new mongoose.Schema({
 	name: String,
 	ip: String,
-	id: String,
 	username: String,
-	health: Int32Array,
+	health: Number,
 	position: String,
+	owner: String,
 	status: {
 		color: String,
 		label: String,
@@ -29,5 +28,3 @@ export const BotSchema = new mongoose.Schema({
 
 const Bot = mongoose.model<IBot>("Bot", BotSchema);
 export default Bot;
-
-new Bot();

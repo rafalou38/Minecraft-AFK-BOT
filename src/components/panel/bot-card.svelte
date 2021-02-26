@@ -3,7 +3,7 @@
 	export let bot = {
 		name: "",
 		ip: "",
-		id: "",
+		_id: "",
 		username: "",
 		health: 0,
 		position: "",
@@ -14,7 +14,7 @@
 	};
 </script>
 
-<a href="/panel/bot/{bot.id}">
+<a href="/panel/bot/view-{bot._id}">
 	<div class="card" use:Ripple={{ ripple: true, color: "surface" }}>
 		<h3 class="primary">{bot.name}</h3>
 		<p class="secondary">{bot.ip}</p>

@@ -1,45 +1,16 @@
+<script lang="ts" context="module">
+	export async function preload(page, session) {
+		const res = await this.fetch("/panel/bot/");
+		return await res.json();
+	}
+</script>
+
 <script lang="ts">
+	import type IBot from "../../models/bot-model";
 	import BotCard from "../../components/panel/bot-card.svelte";
 	import AddCard from "../../components/panel/add-card.svelte";
 
-	const bots = [
-		{
-			name: "roganarafa",
-			ip: "roganarafa.aternos.me",
-			id: "dgdgjdjgooitjhpikfgokjo",
-			username: "piggy",
-			health: 142,
-			position: "-455 25 453",
-			status: {
-				color: "purple",
-				label: "broken",
-			},
-		},
-		{
-			name: "GamescraftDP",
-			ip: "GamescraftDP.aternos.me",
-			id: "djvksdfsugbkdigpqseoiugtd",
-			username: "rafalou38",
-			health: 7,
-			position: "-120 45 693",
-			status: {
-				color: "green",
-				label: "connected",
-			},
-		},
-		{
-			name: "rafaelolo",
-			ip: "rafaelolo.aternos.me",
-			id: "djfijgifdjthoudperhiàrhif",
-			username: "mario",
-			health: 5,
-			position: "-364 71 203",
-			status: {
-				color: "red",
-				label: "crashed",
-			},
-		},
-	];
+	export let bots: typeof IBot[] = [];
 </script>
 
 <h1>Select a BOT</h1>
