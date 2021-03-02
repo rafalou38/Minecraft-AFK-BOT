@@ -15,11 +15,14 @@ import { session } from "./config/keys";
 import passport from "passport";
 var morgan = require("morgan");
 
+const { json } = require("body-parser");
+
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === "development";
 
 const app = express();
 
+app.use(json());
 app.use(morgan("dev"));
 
 // TODO use mongo db for session => express-sessions
