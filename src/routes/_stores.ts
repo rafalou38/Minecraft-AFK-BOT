@@ -32,4 +32,6 @@ function createUser() {
 	};
 }
 
+// todo bot store
+
 export const user = createUser();
