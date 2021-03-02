@@ -21,6 +21,7 @@ const onwarn = (warning, onwarn) =>
 	(warning.code === "CIRCULAR_DEPENDENCY" &&
 		/[/\\]@sapper[/\\]/.test(warning.message)) ||
 	warning.code === "THIS_IS_UNDEFINED" ||
+	warning.message?.match("A11y") ||
 	onwarn(warning);
 
 export default {
