@@ -20,7 +20,19 @@
 <div class="panel">
 	<Sidebar {bot} />
 
-	<h3>{bot}</h3>
+	<div class="main">
+		<ul>
+			<li>position: {bot.position}</li>
+			<li>ip: {bot.ip}</li>
+			<li>username: {bot.username}</li>
+			<li>health: {bot.health}</li>
+			<li>
+				status: <span style="color: {bot.status.color}"
+					>{bot.status.label}</span
+				>
+			</li>
+		</ul>
+	</div>
 </div>
 
 <style>
@@ -31,5 +43,8 @@
 	}
 	:global(aside) {
 		height: auto !important;
+	}
+	.main {
+		width: 100%;
 	}
 </style>
