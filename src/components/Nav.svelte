@@ -7,13 +7,30 @@
 		<a class="logo" href="/">Minecraft AFK BOT</a>
 	</div>
 	<ul>
-		<li>
-			{#if $connected}
-				<a href="/api/auth/logout">logout</a>
-			{:else}
+		{#if $connected}
+			<li>
+				<a href="/panel" class="icon" title="panel"
+					><span
+						class="iconify"
+						data-icon="mdi:robot"
+						data-inline="true"
+					/></a
+				>
+			</li>
+			<li>
+				<a href="/api/auth/logout" class="icon" title="logout"
+					><span
+						class="iconify"
+						data-icon="mdi:logout"
+						data-inline="true"
+					/></a
+				>
+			</li>
+		{:else}
+			<li>
 				<a href="/auth/login">login</a>
-			{/if}
-		</li>
+			</li>
+		{/if}
 	</ul>
 </nav>
 
@@ -36,13 +53,18 @@
 		ul {
 			margin: 0;
 			padding: 0;
+			display: flex;
+			align-items: center;
 		}
 
 		li {
 			display: block;
 			float: left;
 		}
-
+		.icon {
+			font-size: 30px;
+			padding: 0 0 0 0.5em;
+		}
 		a {
 			text-decoration: none;
 			padding: 1em 0.5em;
