@@ -35,10 +35,12 @@
 </nav>
 
 <style lang="scss">
+	@import "../theme/_smui-theme.scss";
+
 	nav {
 		padding: 0 1em;
 		display: flex;
-		background-color: DodgerBlue;
+		background-color: $mdc-theme-primary;
 		color: white;
 		justify-content: space-between;
 		font-family: Rubik;
