@@ -100,8 +100,9 @@
 				variant="raised"
 				style="
 					width: 100%;
-					background-color: #028F01;
 				"
+				disabled={JSON.stringify({ ...initial_bot }) ==
+					JSON.stringify({ ...bot })}
 				on:click={save}><Label>Save</Label></Button
 			>
 		</div>
