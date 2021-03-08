@@ -3,6 +3,9 @@
 	import { connected } from "./_stores";
 
 	connected.init();
+
+	export let segment;
+	segment = "";
 </script>
 
 <Nav />

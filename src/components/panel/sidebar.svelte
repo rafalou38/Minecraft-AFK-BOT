@@ -6,7 +6,7 @@
 
 	const { page } = stores();
 	export let bot: IBot;
-	export let confirm: (objectif: string) => any;
+	export let confirm: (objectif: string) => any = undefined;
 	async function handleClick(e: MouseEvent) {
 		const target = e.target as HTMLElement;
 		if (target.classList.contains("mdc-list-item")) {
