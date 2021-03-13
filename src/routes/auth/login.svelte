@@ -6,6 +6,7 @@
 
 	import Button, { Label } from "@smui/button";
 	import Textfield from "@smui/textfield";
+	import Icon from "@smui/textfield/icon/index";
 
 	import md5 from "md5";
 	import { redirect } from "../../helpers";
@@ -13,10 +14,13 @@
 
 	let username = "";
 	let password = "";
+	let password2 = "";
 	let error_message = "";
+	let register = false;
+	let show_password = false;
 	function loginLocal() {
 		fetch(
-			"/api/auth/local/login?" +
+			`/api/auth/local/${register ? "register" : "login"}?` +
 				new URLSearchParams({
 					password: md5(password),
 					username: username,
@@ -24,7 +28,9 @@
 		)
 			.then((res) => {
 				if (res.status == 401) {
-					error_message = "bad credentials or username";
+					error_message = register
+						? "username already taken"
+						: "bad credentials or username";
 				} else {
 					redirect("/panel");
 				}
@@ -37,8 +43,8 @@
 
 <div class="bg" />
 <div class="container">
-	<h1>Login</h1>
-	<p>Chose your favorite way of login</p>
+	<h1>{register ? "Register" : "Login"}</h1>
+	<p>Chose your favorite way {register ? "to register" : "of login"}</p>
 	<div class="btn-container">
 		<GoogleButton href="/api/auth/google" />
 		<!-- <MicrosoftButton href="/api/auth/microsoft" /> -->
@@ -63,18 +69,67 @@
 		<Textfield
 			variant="filled"
 			label="password"
-			type="password"
+			type={show_password ? "text" : "password"}
+			withTrailingIcon
 			bind:value={password}
 			on:focus={() => {
 				error_message = "";
 			}}
 			class="field"
-		/>
+			><Icon
+				class="material-icons"
+				role="button"
+				on:click={() => (show_password = !show_password)}
+				>{show_password ? "visibility_off" : "visibility"}</Icon
+			></Textfield
+		>
+		{#if register}
+			<Textfield
+				variant="filled"
+				label="confirm password"
+				type={show_password ? "text" : "password"}
+				withTrailingIcon
+				bind:value={password2}
+				on:focus={() => {
+					error_message = "";
+				}}
+				class="field"
+				><Icon
+					class="material-icons"
+					role="button"
+					on:click={() => (show_password = !show_password)}
+					>{show_password ? "visibility_off" : "visibility"}</Icon
+				></Textfield
+			>
+		{/if}
+
 		{#if error_message}
 			<p class="err-msg">{error_message}</p>
 		{/if}
-		<Button variant="raised" class="submit-btn"><Label>Login</Label></Button
+		<Button variant="raised" class="submit-btn"
+			><Label>{register ? "Register" : "Login"}</Label></Button
 		>
+		{#if register}
+			<!-- content here -->
+			<small
+				>already have an account? <button
+					class="link"
+					on:click={() => {
+						register = false;
+					}}>login</button
+				></small
+			>
+		{:else}
+			<!-- else content here -->
+			<small
+				>Dont have an account? <button
+					class="link"
+					on:click={() => {
+						register = true;
+					}}>register</button
+				></small
+			>
+		{/if}
 	</form>
 </div>
 
@@ -122,5 +177,23 @@
 			text-align: center;
 			color: #ff0033;
 		}
+		small {
+			text-align: center;
+			opacity: 0.7;
+			margin-top: 20px;
+			font-size: 16px;
+		}
+	}
+	button.link {
+		color: blue;
+		display: inline;
+		border: none;
+		padding: 0;
+		background: none;
+		text-decoration: underline;
+		cursor: pointer;
+		font-size: 16px;
+		font-family: Roboto;
+		line-height: 24px;
 	}
 </style>
