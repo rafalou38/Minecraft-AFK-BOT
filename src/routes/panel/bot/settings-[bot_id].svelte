@@ -36,11 +36,8 @@
 		return true;
 	}
 
-	let nothingToChangeSnackbar;
 	async function save() {
-		if (JSON.stringify({ ...initial_bot }) == JSON.stringify({ ...bot })) {
-			nothingToChangeSnackbar.open();
-		} else {
+		if (JSON.stringify({ ...initial_bot }) != JSON.stringify({ ...bot })) {
 			// TODO handle error
 			const response = await fetch(`panel/bot/`, {
 				method: "PUT",
@@ -55,13 +52,6 @@
 		}
 	}
 </script>
-
-<Snackbar bind:this={nothingToChangeSnackbar}>
-	<SnackbarLabel>Nothing to save 🤨</SnackbarLabel>
-	<Actions>
-		<IconButton class="material-icons" title="Dismiss">close</IconButton>
-	</Actions>
-</Snackbar>
 
 <div class="panel">
 	<Sidebar {bot} confirm={confirmExit} />
