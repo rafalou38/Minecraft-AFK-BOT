@@ -21,13 +21,8 @@
 
 	export let bot: IBot;
 	let initial_bot: any;
-	$: if (bot && !initial_bot) {
-		initial_bot = { ...bot };
-	}
 	async function confirmExit(objectif: string) {
-		if (
-			!(JSON.stringify({ ...initial_bot }) == JSON.stringify({ ...bot }))
-		) {
+		if (!(initial_bot == JSON.stringify({ ...bot }))) {
 			// TODO  Use smui dialog
 			return confirm("you didnt saved, are you sure? 😙");
 		}
@@ -44,7 +39,7 @@
 			},
 		});
 		if (response.status === 200) {
-			initial_bot = { ...bot };
+			initial_bot = JSON.stringify(bot);
 		}
 	}
 	async function delete_action(e) {
@@ -52,7 +47,39 @@
 			(action) => action.id != e.detail
 		);
 	}
-	async function add_action() {}
+	async function add_action() {
+		console.log("created action");
+		bot.actions = [
+			...bot.actions,
+			{
+				id: uniqueID(),
+				type: null,
+				params: {},
+			},
+		];
+		bot.actions.push();
+	}
+
+	import { flip } from "svelte/animate";
+	import { dndzone } from "svelte-dnd-action";
+	import { uniqueID } from "../../../helpers";
+	import { action_destroyer } from "svelte/internal";
+	const flipDurationMs = 300;
+
+	function handleDndConsider(e) {
+		bot.actions = e.detail.items;
+	}
+	function handleDndFinalize(e) {
+		bot.actions = e.detail.items;
+	}
+	let disabled = false;
+	$: update();
+	function update() {
+		if (bot && !initial_bot) {
+			initial_bot = JSON.stringify(bot);
+		}
+		disabled = initial_bot == JSON.stringify({ ...bot });
+	}
 </script>
 
 <div class="panel">
@@ -61,25 +88,36 @@
 	<div class="main">
 		<div class="form">
 			<h2>Actions</h2>
-			<ol>
+			<!-- TODO: https://svelte.dev/repl/4949485c5a8f46e7bdbeb73ed565a9c7?version=3.24.1 handles -->
+			<ol
+				use:dndzone={{
+					items: bot.actions,
+					flipDurationMs,
+					dropTargetStyle: { "background-color": "#00000010" },
+				}}
+				on:consider={handleDndConsider}
+				on:finalize={handleDndFinalize}
+			>
 				{#each bot.actions || [] as action (action.id)}
-					<li>
-						<Action on:delete={delete_action} {action} />
+					<li animate:flip={{ duration: flipDurationMs }}>
+						<Action on:delete={delete_action} {action} {update} />
 					</li>
 				{/each}
 			</ol>
 			<div class="add">
-				<IconButton class="material-icons add">add</IconButton>
+				<IconButton class="material-icons add" on:click={add_action}
+					>add</IconButton
+				>
 			</div>
 			<Button
 				variant="raised"
 				style="
 					width: 100%;
 				"
-				disabled={JSON.stringify({ ...initial_bot }) ==
-					JSON.stringify({ ...bot })}
+				{disabled}
 				on:click={save}><Label>Save</Label></Button
 			>
+			<small>fields marked with <strong>"*"</strong> are required</small>
 		</div>
 	</div>
 </div>
