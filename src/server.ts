@@ -35,6 +35,25 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+const redirects = [
+	[true, ["/auth/login", "/panel"]],
+	[false, ["/panel", "/auth/login"]],
+];
+
+redirects.forEach((redir) => {
+	let [should_be_logged_in, urls] = redir;
+
+	app.use(urls[0], (req, res, next) => {
+		if (should_be_logged_in && req.user) {
+			res.redirect(urls[1]);
+		} else if (!should_be_logged_in && !req.user) {
+			res.redirect(urls[1]);
+		} else {
+			next();
+		}
+	});
+});
+
 app.use("/api/auth", authRoutes);
 
 app.use(
