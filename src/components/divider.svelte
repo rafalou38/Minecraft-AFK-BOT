@@ -10,11 +10,10 @@
 
 <style lang="scss">
 	div {
-		width: 100%;
+		width: 300px;
 		display: flex;
 		align-items: center;
 		color: rgba(0, 0, 0, 0.6);
-		padding: 0 25%;
 		box-sizing: border-box;
 		span {
 			flex-grow: 1;

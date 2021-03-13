@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
 export interface IUser extends mongoose.Document {
-	email: string;
+	email?: string;
 	username: string;
-	auth_type: "google" | "email" | "facebook" | "microsoft";
-	strategy_id: string;
+	auth_type: "google" | "email" | "facebook" | "local";
+	strategy_id?: string;
+	password?: string;
 }
 
 export const UserSchema = new mongoose.Schema({
@@ -12,6 +13,7 @@ export const UserSchema = new mongoose.Schema({
 	auth_type: String,
 	email: String,
 	strategy_id: String,
+	password: String,
 });
 
 const User = mongoose.model<IUser>("User", UserSchema);

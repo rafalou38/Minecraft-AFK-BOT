@@ -3,8 +3,10 @@ import { writable } from "svelte/store";
 import { fetchJson, isBrowser } from "../helpers";
 
 export const connected: any = writable(undefined);
+connected.value = false;
 connected.init = () => {
 	stores().session.update((sess) => {
+		connected.value = sess.user_id != undefined;
 		connected.set(sess.user_id != undefined);
 		return sess;
 	});
