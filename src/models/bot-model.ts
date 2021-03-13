@@ -11,13 +11,11 @@ export interface IBot extends mongoose.Document {
 		color: string;
 		label: string;
 	};
-	actions: [
-		{
-			id: string;
-			type: string;
-			params: object;
-		}
-	];
+	actions: Array<{
+		id: string;
+		type: string;
+		params: object;
+	}>;
 }
 
 export const BotSchema = new mongoose.Schema({
