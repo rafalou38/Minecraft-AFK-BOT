@@ -19,24 +19,26 @@ export interface IBot extends mongoose.Document {
 }
 
 export const BotSchema = new mongoose.Schema({
-	name: String,
-	ip: String,
-	username: String,
-	health: Number,
-	position: String,
-	owner: String,
-	status: {
-		color: String,
-		label: String,
-	},
-	actions: [
-		{
-			id: String,
-			type: String,
-			params: Object,
+		name: String,
+		ip: String,
+		username: String,
+		health: Number,
+		position: String,
+		owner: String,
+		status: {
+			color: String,
+			label: String,
 		},
-	],
-});
+		actions: [
+			{
+				id: String,
+				type: String,
+				params: Object,
+			},
+		],
+	},
+	{ typeKey: "$type" }
+);
 
 const Bot = mongoose.model<IBot>("Bot", BotSchema);
 export default Bot;
