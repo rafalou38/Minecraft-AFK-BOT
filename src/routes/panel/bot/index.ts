@@ -14,30 +14,28 @@ export async function get(req: Request, res: Response, next: () => void) {
 
 export async function put(req: Request, res: Response, next: () => void) {
 	const body = req.body as IBot;
-	if (body.name && body.ip && body.username && body._id) {
-		Bot.findByIdAndUpdate(
-			body._id,
-			{
-				name: body.name,
-				ip: body.ip,
-				username: body.username,
-			},
-			{ new: true }
-		)
-			.then((updatedBot) => {
-				if (updatedBot) {
-					res.statusCode = 200;
-					res.json(updatedBot);
-				} else {
-					res.statusCode = 404;
-					res.json(updatedBot);
-				}
-			})
-			.catch((err) => {
-				res.statusCode = 500;
-			});
-	} else {
+	let update: any = {};
+	if (body.name) update.name = body.name;
+	if (body.ip) update.ip = body.ip;
+	if (body.username) update.username = body.username;
+	if (body._id) update._id = body._id;
+	if (body.actions) update.actions = body.actions;
+	if (Object.keys(update).length === 0) {
 		res.statusCode = 422;
 		res.end();
+		return;
 	}
+	Bot.findByIdAndUpdate(body._id, update, { new: true })
+		.then((updatedBot) => {
+			if (updatedBot) {
+				res.statusCode = 200;
+				res.json(updatedBot);
+			} else {
+				res.statusCode = 404;
+				res.json(updatedBot);
+			}
+		})
+		.catch((err) => {
+			res.statusCode = 500;
+		});
 }
