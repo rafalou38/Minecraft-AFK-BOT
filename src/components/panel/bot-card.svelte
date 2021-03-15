@@ -1,17 +1,7 @@
 <script lang="ts">
 	import Ripple from "@smui/ripple";
-	export let bot = {
-		name: "",
-		ip: "",
-		_id: "",
-		username: "",
-		health: 0,
-		position: "",
-		status: {
-			color: "grey",
-			label: "",
-		},
-	};
+	import type { IBot } from "../../models/bot-model";
+	export let bot: IBot;
 </script>
 
 <a href="/panel/bot/status-{bot._id}">
