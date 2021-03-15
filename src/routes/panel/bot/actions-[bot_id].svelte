@@ -39,7 +39,9 @@
 			},
 		});
 		if (response.status === 200) {
+			bot = await response.json();
 			initial_bot = JSON.stringify(bot);
+			update();
 		}
 	}
 	async function delete_action(e) {
