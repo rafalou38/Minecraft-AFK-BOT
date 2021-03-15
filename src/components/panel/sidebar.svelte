@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { fly } from "svelte/transition";
+	import { flip } from "svelte/animate";
+	import { create_animation } from "svelte/internal";
 	import Drawer, { Content, Header, Subtitle, Title } from "@smui/drawer";
+	import IconButton from "@smui/icon-button";
 	import List, {
 		Graphic,
 		Item,
@@ -28,60 +32,93 @@
 			}
 		}
 	}
+	let open = true;
+	let ended = false;
 </script>
 
-<Drawer variant="standard" open>
-	<Header>
-		<img
-			src="https://mc-heads.net/avatar/{bot.username}"
-			alt="{bot.username}'s head"
-		/>
-		<Title>{bot?.name}</Title>
-		<Subtitle>{bot?.ip}</Subtitle>
-	</Header>
-	<Content>
-		<List>
-			<div on:click={handleClick}>
-				<Separator nav />
-				<Subheader component={H6}>Status</Subheader>
-				<Item activated={$page.path?.match("general") !== null}>
-					<Graphic class="material-icons" aria-hidden="true"
-						>info</Graphic
-					>
-					<Text>General</Text>
-				</Item>
-				<Item activated={$page.path?.match("view") !== null}>
-					<Graphic class="material-icons" aria-hidden="true"
-						>preview</Graphic
-					>
-					<Text>View</Text>
-				</Item>
-				<Separator nav />
-				<Subheader component={H6}>Settings</Subheader>
-				<Item activated={$page.path?.match("actions") !== null}>
-					<Graphic class="material-icons" aria-hidden="true"
-						>build</Graphic
-					>
-					<Text>Actions</Text>
-				</Item>
-				<Item activated={$page.path?.match("config") !== null}>
-					<Graphic class="material-icons" aria-hidden="true"
-						>tune</Graphic
-					>
-					<Text>Config</Text>
-				</Item>
-				<Item activated={$page.path?.match("settings") !== null}>
-					<Graphic class="material-icons" aria-hidden="true"
-						>settings</Graphic
-					>
-					<Text>Settings</Text>
-				</Item>
-			</div>
-		</List>
-	</Content>
-</Drawer>
+{#if open}
+	<div
+		class="sidebar-container"
+		in:fly={{ x: -200, duration: 500 }}
+		out:fly={{ x: -200, duration: 500 }}
+		on:outroend={() => {
+			ended = true;
+		}}
+		on:introstart={() => {
+			ended = false;
+		}}
+	>
+		<Drawer>
+			<Header>
+				<img
+					src="https://mc-heads.net/avatar/{bot.username}"
+					alt="{bot.username}'s head"
+				/>
+				<Title>{bot?.name}</Title>
+				<Subtitle>{bot?.ip}</Subtitle>
+			</Header>
+			<Content>
+				<List>
+					<div on:click={handleClick}>
+						<Separator nav />
+						<Subheader component={H6}>Status</Subheader>
+						<Item activated={$page.path?.match("general") !== null}>
+							<Graphic class="material-icons" aria-hidden="true"
+								>info</Graphic
+							>
+							<Text>General</Text>
+						</Item>
+						<Item activated={$page.path?.match("view") !== null}>
+							<Graphic class="material-icons" aria-hidden="true"
+								>preview</Graphic
+							>
+							<Text>View</Text>
+						</Item>
+						<Separator nav />
+						<Subheader component={H6}>Settings</Subheader>
+						<Item activated={$page.path?.match("actions") !== null}>
+							<Graphic class="material-icons" aria-hidden="true"
+								>build</Graphic
+							>
+							<Text>Actions</Text>
+						</Item>
+						<Item activated={$page.path?.match("config") !== null}>
+							<Graphic class="material-icons" aria-hidden="true"
+								>tune</Graphic
+							>
+							<Text>Config</Text>
+						</Item>
+						<Item
+							activated={$page.path?.match("settings") !== null}
+						>
+							<Graphic class="material-icons" aria-hidden="true"
+								>settings</Graphic
+							>
+							<Text>Settings</Text>
+						</Item>
+					</div>
+				</List>
+			</Content>
+		</Drawer>
+		<IconButton
+			class="material-icons close-btn"
+			on:click={() => (open = !open)}>chevron_left</IconButton
+		>
+	</div>
+{:else if ended}
+	<div
+		class="side-closed"
+		in:fly={{ x: -200, duration: 500 }}
+		out:fly={{ x: 200, duration: 500 }}
+	>
+		<IconButton
+			class="material-icons open-btn"
+			on:click={() => (open = !open)}>chevron_right</IconButton
+		>
+	</div>
+{/if}
 
-<style>
+<style lang="scss">
 	img {
 		margin: 30px auto 0 auto;
 		display: block;
@@ -89,5 +126,25 @@
 	}
 	:global(h6) {
 		text-align: start;
+	}
+	:global(.close-btn) {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 5px;
+	}
+	:global(.open-btn) {
+		margin: 5px;
+	}
+	.side-closed {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+	}
+	.sidebar-container {
+		position: relative;
+		z-index: 2;
+		border-right: 1px solid rgba(0, 0, 0, 0.12);
 	}
 </style>
