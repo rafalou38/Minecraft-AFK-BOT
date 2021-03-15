@@ -1,8 +1,21 @@
 <script lang="ts">
 	import Ripple from "@smui/ripple";
+	import { redirect } from "../../helpers";
+	async function addBot() {
+		let r = await fetch("/panel/bot/add");
+		if (r.status == 200) {
+			let j = await r.json();
+			redirect("/panel/bot/status-" + j._id);
+			console.log(await r.json());
+		}
+	}
 </script>
 
-<div class="card" use:Ripple={{ ripple: true, color: "surface" }}>
+<div
+	class="card"
+	use:Ripple={{ ripple: true, color: "surface" }}
+	on:click={addBot}
+>
 	<h3 class="primary">new bot</h3>
 	<p class="secondary">+</p>
 </div>
