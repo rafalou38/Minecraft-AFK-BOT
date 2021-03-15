@@ -1,6 +1,14 @@
 <script lang="ts">
 	import Drawer, { Content, Header, Subtitle, Title } from "@smui/drawer";
-	import List, { Graphic, Item, Text } from "@smui/list";
+	import List, {
+		Graphic,
+		Item,
+		Text,
+		Subheader,
+		Separator,
+	} from "@smui/list";
+	import H6 from "@smui/common/H6.svelte";
+
 	import type { IBot } from "../../models/bot-model";
 	import { stores, goto } from "@sapper/app";
 
@@ -34,23 +42,39 @@
 	<Content>
 		<List>
 			<div on:click={handleClick}>
-				<Item activated={$page.path?.match("status") !== null}>
+				<Separator nav />
+				<Subheader component={H6}>Status</Subheader>
+				<Item activated={$page.path?.match("general") !== null}>
 					<Graphic class="material-icons" aria-hidden="true"
 						>info</Graphic
 					>
-					<Text>Status</Text>
+					<Text>General</Text>
+				</Item>
+				<Item activated={$page.path?.match("view") !== null}>
+					<Graphic class="material-icons" aria-hidden="true"
+						>preview</Graphic
+					>
+					<Text>View</Text>
+				</Item>
+				<Separator nav />
+				<Subheader component={H6}>Settings</Subheader>
+				<Item activated={$page.path?.match("actions") !== null}>
+					<Graphic class="material-icons" aria-hidden="true"
+						>build</Graphic
+					>
+					<Text>Actions</Text>
+				</Item>
+				<Item activated={$page.path?.match("config") !== null}>
+					<Graphic class="material-icons" aria-hidden="true"
+						>tune</Graphic
+					>
+					<Text>Config</Text>
 				</Item>
 				<Item activated={$page.path?.match("settings") !== null}>
 					<Graphic class="material-icons" aria-hidden="true"
 						>settings</Graphic
 					>
 					<Text>Settings</Text>
-				</Item>
-				<Item activated={$page.path?.match("actions") !== null}>
-					<Graphic class="material-icons" aria-hidden="true"
-						>build</Graphic
-					>
-					<Text>Actions</Text>
 				</Item>
 			</div>
 		</List>
@@ -62,5 +86,8 @@
 		margin: 30px auto 0 auto;
 		display: block;
 		width: 50%;
+	}
+	:global(h6) {
+		text-align: start;
 	}
 </style>
