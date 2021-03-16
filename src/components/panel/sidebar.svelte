@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { fly } from "svelte/transition";
-	import { flip } from "svelte/animate";
-	import { create_animation } from "svelte/internal";
+	import { botStore } from "../../routes/_stores";
 	import Drawer, { Content, Header, Subtitle, Title } from "@smui/drawer";
 	import IconButton from "@smui/icon-button";
 	import List, {
@@ -12,12 +11,10 @@
 		Separator,
 	} from "@smui/list";
 	import H6 from "@smui/common/H6.svelte";
-
-	import type { IBot } from "../../models/bot-model";
 	import { stores, goto } from "@sapper/app";
 
 	const { page } = stores();
-	export let bot: IBot;
+
 	export let confirm: (objectif: string) => any = undefined;
 	async function handleClick(e: MouseEvent) {
 		const target = e.target as HTMLElement;
@@ -28,7 +25,7 @@
 				.toLocaleLowerCase();
 
 			if ((await confirm?.(objectif)) || !confirm) {
-				goto(`/panel/bot/${objectif}-${bot._id}`);
+				goto(`/panel/bot/${objectif}-${$botStore._id}`);
 			}
 		}
 	}
@@ -51,11 +48,11 @@
 		<Drawer>
 			<Header>
 				<img
-					src="https://mc-heads.net/avatar/{bot.username}"
-					alt="{bot.username}'s head"
+					src="https://mc-heads.net/avatar/{$botStore.username}"
+					alt="{$botStore.username}'s head"
 				/>
-				<Title>{bot?.name}</Title>
-				<Subtitle>{bot?.ip}</Subtitle>
+				<Title>{$botStore?.name}</Title>
+				<Subtitle>{$botStore?.ip}</Subtitle>
 			</Header>
 			<Content>
 				<List>

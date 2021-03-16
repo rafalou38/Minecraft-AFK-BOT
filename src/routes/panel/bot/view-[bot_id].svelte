@@ -1,32 +1,18 @@
 <script lang="ts" context="module">
-	export async function preload(page, session) {
-		const { bot_id } = page.params;
-
-		const bot = await (
-			await this.fetch(`/panel/bot/action-${bot_id}`)
-		).json();
-
-		return { bot };
-	}
+	import updateBotStore from "./_update_bot_store";
+	export const preload = updateBotStore;
 </script>
 
 <script lang="ts">
-	import type { IBot } from "../../../models/bot-model";
-	import Sidebar from "../../../components/panel/sidebar.svelte";
-
-	export let bot: IBot;
+	import { botStore } from "../../_stores";
 </script>
 
-<div class="panel">
-	<Sidebar {bot} />
-
-	<div class="main">
-		<!-- TODO -->
-		<h2>TODO</h2>
-	</div>
+<div class="main">
+	<!-- TODO -->
+	<h2>TODO</h2>
 </div>
 
-<style>
+<style lang="scss">
 	.panel {
 		display: flex;
 		height: 100%;

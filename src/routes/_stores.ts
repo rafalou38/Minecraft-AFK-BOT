@@ -1,6 +1,8 @@
 import { stores } from "@sapper/app";
 import { writable } from "svelte/store";
+import { asyncable } from "svelte-asyncable";
 import { fetchJson, isBrowser } from "../helpers";
+import type { IBot } from "../models/bot-model";
 
 export const connected: any = writable(undefined);
 connected.value = false;
@@ -12,7 +14,7 @@ connected.init = () => {
 	});
 };
 
-function createUser() {
+function createUserStore() {
 	const { subscribe, set, update } = writable({});
 
 	let is_not_set = true;
@@ -33,7 +35,38 @@ function createUser() {
 		update,
 	};
 }
+function createBotStore(initial) {
+	const { subscribe, set } = writable(initial);
+	let value = initial;
+	return {
+		subscribe,
+		set: (newValue) => {
+			value = newValue;
+			set(value);
+		},
+		update: (updater) => {
+			value = updater(value);
+			set(value);
+		},
+		updateAsync: async (updater) => {
+			value = await updater(value);
+			set(value);
+		},
+		get: () => value,
+	};
+}
 
 // todo bot store
+export const botStore = createBotStore({
+	name: "",
+	ip: "",
+	username: "",
+	actions: [],
+	status: {},
+	owner: "",
+	health: 0,
+	position: "",
+	_id: "",
+} as IBot);
 
-export const user = createUser();
+export const user = createUserStore();
