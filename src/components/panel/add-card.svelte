@@ -5,7 +5,7 @@
 		let r = await fetch("/panel/bot/add");
 		if (r.status == 200) {
 			let j = await r.json();
-			redirect("/panel/bot/status-" + j._id);
+			redirect("/panel/bot/general-" + j._id);
 			console.log(await r.json());
 		}
 	}

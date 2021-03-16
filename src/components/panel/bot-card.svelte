@@ -4,7 +4,7 @@
 	export let bot: IBot;
 </script>
 
-<a href="/panel/bot/status-{bot._id}">
+<a href="/panel/bot/general-{bot._id}">
 	<div class="card" use:Ripple={{ ripple: true, color: "surface" }}>
 		<h3 class="primary">{bot.name}</h3>
 		<p class="secondary">{bot.ip}</p>
