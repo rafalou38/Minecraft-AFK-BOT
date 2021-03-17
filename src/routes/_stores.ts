@@ -65,6 +65,7 @@ export const botStore = createBotStore({
 	owner: "",
 	health: 0,
 	position: "",
+	password: "",
 	_id: "",
 } as IBot);
 

@@ -13,12 +13,13 @@ export async function get(req: Request, res: Response, next: () => void) {
 				health: 0,
 				position: "",
 				owner: req.user,
+				password: "",
 				status: {
 					color: "grey",
 					label: "not started",
 				},
 				actions: [],
-			})
+			} as IBot)
 				.save()
 				.then((newBot) => {
 					res.json(newBot);

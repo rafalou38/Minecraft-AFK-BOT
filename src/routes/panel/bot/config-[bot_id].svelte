@@ -72,7 +72,7 @@
 
 	<Textfield
 		variant="outlined"
-		bind:value={$botStore.username}
+		bind:value={$botStore.password}
 		label="Password"
 		style="width: 100%;"
 	/>

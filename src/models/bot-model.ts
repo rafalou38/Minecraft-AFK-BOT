@@ -6,6 +6,7 @@ export interface IBot extends mongoose.Document {
 	username: string;
 	health: number;
 	position: string;
+	password: string;
 	owner: string;
 	status: {
 		color: string;
@@ -18,10 +19,12 @@ export interface IBot extends mongoose.Document {
 	}>;
 }
 
-export const BotSchema = new mongoose.Schema({
+export const BotSchema = new mongoose.Schema(
+	{
 		name: String,
 		ip: String,
 		username: String,
+		password: String,
 		health: Number,
 		position: String,
 		owner: String,
