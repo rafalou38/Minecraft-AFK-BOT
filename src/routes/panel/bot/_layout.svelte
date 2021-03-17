@@ -8,7 +8,9 @@
 
 <div class="panel">
 	<Sidebar confirm={confirmExit} />
-	<slot />
+	<div class="main">
+		<slot />
+	</div>
 </div>
 
 <style lang="scss">
@@ -16,5 +18,9 @@
 		display: flex;
 		height: 100%;
 		flex-grow: 1;
+	}
+	.main {
+		width: 100%;
+		height: 100%;
 	}
 </style>

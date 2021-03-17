@@ -78,50 +78,40 @@
 	}
 </script>
 
-<div class="main">
-	<div class="form">
-		<h2>Actions</h2>
-		<!-- TODO: https://svelte.dev/repl/4949485c5a8f46e7bdbeb73ed565a9c7?version=3.24.1 handles -->
-		<ol
-			use:dndzone={{
-				items: $botStore.actions,
-				flipDurationMs,
-				dropTargetStyle: { "background-color": "#00000010" },
-			}}
-			on:consider={handleDndConsider}
-			on:finalize={handleDndFinalize}
+<div class="form">
+	<h2>Actions</h2>
+	<!-- TODO: https://svelte.dev/repl/4949485c5a8f46e7bdbeb73ed565a9c7?version=3.24.1 handles -->
+	<ol
+		use:dndzone={{
+			items: $botStore.actions,
+			flipDurationMs,
+			dropTargetStyle: { "background-color": "#00000010" },
+		}}
+		on:consider={handleDndConsider}
+		on:finalize={handleDndFinalize}
+	>
+		{#each $botStore.actions || [] as action (action.id)}
+			<li animate:flip={{ duration: flipDurationMs }}>
+				<Action on:delete={delete_action} {action} {update} />
+			</li>
+		{/each}
+	</ol>
+	<div class="add">
+		<IconButton class="material-icons add" on:click={add_action}
+			>add</IconButton
 		>
-			{#each $botStore.actions || [] as action (action.id)}
-				<li animate:flip={{ duration: flipDurationMs }}>
-					<Action on:delete={delete_action} {action} {update} />
-				</li>
-			{/each}
-		</ol>
-		<div class="add">
-			<IconButton class="material-icons add" on:click={add_action}
-				>add</IconButton
-			>
-		</div>
-		<Button variant="raised" style="
+	</div>
+	<Button variant="raised" style="
 					width: 100%;
 				" {disabled} on:click={save}
-			><Label>Save</Label></Button
-		>
-		<small>fields marked with <strong>"*"</strong> are required</small>
-	</div>
+		><Label>Save</Label></Button
+	>
+	<small>fields marked with <strong>"*"</strong> are required</small>
 </div>
 
 <style lang="scss">
-	.panel {
-		display: flex;
-		height: 100%;
-		flex-grow: 1;
-	}
 	:global(aside) {
 		height: auto !important;
-	}
-	.main {
-		width: 100%;
 	}
 	.form {
 		margin: 0 auto;
@@ -134,7 +124,6 @@
 		gap: 1em;
 
 		width: 60%;
-		height: 100%;
 		min-width: 20em;
 		max-width: 50em;
 		ol {

@@ -47,54 +47,49 @@
 	}
 </script>
 
-<div class="main">
-	<div class="form">
-		<h2>Settings</h2>
-		<Textfield
-			variant="outlined"
-			bind:value={$botStore.name}
-			label="Name"
-			style="width: 100%;"
-		/>
+<div class="form">
+	<h2>Settings</h2>
+	<Textfield
+		variant="outlined"
+		bind:value={$botStore.name}
+		label="Name"
+		style="width: 100%;"
+	/>
 
-		<Textfield
-			variant="outlined"
-			bind:value={$botStore.ip}
-			label="IP"
-			style="width: 100%;"
-		/>
+	<Textfield
+		variant="outlined"
+		bind:value={$botStore.ip}
+		label="IP"
+		style="width: 100%;"
+	/>
 
-		<Textfield
-			variant="outlined"
-			bind:value={$botStore.username}
-			label="Username"
-			style="width: 100%;"
-		/>
+	<Textfield
+		variant="outlined"
+		bind:value={$botStore.username}
+		label="Username"
+		style="width: 100%;"
+	/>
 
-		<Textfield
-			variant="outlined"
-			bind:value={$botStore.username}
-			label="Password"
-			style="width: 100%;"
-		/>
-		<Button
-			variant="raised"
-			style="
+	<Textfield
+		variant="outlined"
+		bind:value={$botStore.username}
+		label="Password"
+		style="width: 100%;"
+	/>
+	<Button
+		variant="raised"
+		style="
 					width: 100%;
 				"
-			disabled={JSON.stringify({ ...initial_bot }) ==
-				JSON.stringify({ ...$botStore })}
-			on:click={save}><Label>Save</Label></Button
-		>
-	</div>
+		disabled={JSON.stringify({ ...initial_bot }) ==
+			JSON.stringify({ ...$botStore })}
+		on:click={save}><Label>Save</Label></Button
+	>
 </div>
 
 <style lang="scss">
 	:global(aside) {
 		height: auto !important;
-	}
-	.main {
-		width: 100%;
 	}
 	.form {
 		margin: 0 auto;
@@ -107,7 +102,6 @@
 		gap: 1em;
 
 		width: 40%;
-		height: 100%;
 		min-width: 20em;
 		max-width: 30em;
 	}

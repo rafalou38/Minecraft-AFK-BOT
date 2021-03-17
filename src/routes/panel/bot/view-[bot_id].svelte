@@ -7,21 +7,11 @@
 	import { botStore } from "../../_stores";
 </script>
 
-<div class="main">
-	<!-- TODO -->
-	<h2>TODO</h2>
-</div>
+<!-- TODO -->
+<h2>TODO</h2>
 
 <style lang="scss">
-	.panel {
-		display: flex;
-		height: 100%;
-		flex-grow: 1;
-	}
 	:global(aside) {
 		height: auto !important;
-	}
-	.main {
-		width: 100%;
 	}
 </style>

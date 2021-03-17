@@ -8,25 +8,21 @@
 </script>
 
 <pre>{JSON.stringify($botStore, null, 2)}</pre>
-<div class="main">
-	<ul>
-		<li>position: {$botStore.position}</li>
-		<li>ip: {$botStore.ip}</li>
-		<li>username: {$botStore.username}</li>
-		<li>health: {$botStore.health}</li>
-		<li>
-			status: <span style="color: {$botStore.status?.color}"
-				>{$botStore.status?.label}</span
-			>
-		</li>
-	</ul>
-</div>
+
+<ul>
+	<li>position: {$botStore.position}</li>
+	<li>ip: {$botStore.ip}</li>
+	<li>username: {$botStore.username}</li>
+	<li>health: {$botStore.health}</li>
+	<li>
+		status: <span style="color: {$botStore.status?.color}"
+			>{$botStore.status?.label}</span
+		>
+	</li>
+</ul>
 
 <style>
 	:global(aside) {
 		height: auto !important;
-	}
-	.main {
-		width: 100%;
 	}
 </style>
