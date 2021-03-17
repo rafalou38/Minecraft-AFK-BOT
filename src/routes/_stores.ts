@@ -56,7 +56,6 @@ function createBotStore(initial) {
 	};
 }
 
-// todo bot store
 export const botStore = createBotStore({
 	name: "",
 	ip: "",
