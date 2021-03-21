@@ -7,8 +7,6 @@
 	import { botStore } from "../../_stores";
 </script>
 
-<pre>{JSON.stringify($botStore, null, 2)}</pre>
-
 <ul>
 	<li>position: {$botStore.position}</li>
 	<li>ip: {$botStore.ip}</li>
