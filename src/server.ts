@@ -8,7 +8,7 @@ import express from "express";
 import sirv from "sirv";
 import authRoutes from "./auth-routes";
 import "./config/passport-setup";
-import "./config/mongoose-setup";
+import { connect as connectMongoose } from "./config/mongoose-setup";
 
 import cookieSession from "cookie-session";
 import { session } from "./config/keys";
@@ -66,6 +66,15 @@ app.use(
 	})
 );
 
-app.listen(PORT).on("error", (e) => {
-	console.log("Express error happened: ", e.message);
-});
+connectMongoose
+	.then(() => {
+		app
+			.listen(PORT)
+			.on("error", (e) => {
+				console.log("Express error happened: ", e.message);
+			})
+			.on("listening", () => {
+				console.log(`app listening at http://localhost:${PORT} ✅`);
+			});
+	})
+	.catch();
