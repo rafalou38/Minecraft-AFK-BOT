@@ -8,6 +8,7 @@ export interface IBot extends mongoose.Document {
 	position: string;
 	password: string;
 	owner: string;
+	endTime: number;
 	status: {
 		color: string;
 		label: string;
@@ -28,6 +29,7 @@ export const BotSchema = new mongoose.Schema(
 		health: Number,
 		position: String,
 		owner: String,
+		endTime: Number,
 		status: {
 			color: String,
 			label: String,

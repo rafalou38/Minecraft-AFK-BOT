@@ -3,13 +3,7 @@
 	import { botStore } from "../../routes/_stores";
 	import Drawer, { Content, Header, Subtitle, Title } from "@smui/drawer";
 	import IconButton from "@smui/icon-button";
-	import List, {
-		Graphic,
-		Item,
-		Text,
-		Subheader,
-		Separator,
-	} from "@smui/list";
+	import List, { Graphic, Item, Text, Subheader, Separator } from "@smui/list";
 	import H6 from "@smui/common/H6.svelte";
 	import { stores, goto } from "@sapper/app";
 
@@ -19,10 +13,7 @@
 	async function handleClick(e: MouseEvent) {
 		const target = e.target as HTMLElement;
 		if (target.classList.contains("mdc-list-item")) {
-			const objectif = target.innerText
-				.split("\n")
-				.pop()
-				.toLocaleLowerCase();
+			const objectif = target.innerText.split("\n").pop().toLocaleLowerCase();
 
 			if ((await confirm?.(objectif)) || !confirm) {
 				goto(`/panel/bot/${objectif}-${$botStore._id}`);
@@ -60,10 +51,12 @@
 						<Separator nav />
 						<Subheader component={H6}>Status</Subheader>
 						<Item activated={$page.path?.match("general") !== null}>
-							<Graphic class="material-icons" aria-hidden="true"
-								>info</Graphic
-							>
+							<Graphic class="material-icons" aria-hidden="true">info</Graphic>
 							<Text>General</Text>
+						</Item>
+						<Item activated={$page.path?.match("time") !== null}>
+							<Graphic class="material-icons" aria-hidden="true">alarm</Graphic>
+							<Text>time</Text>
 						</Item>
 						<Item activated={$page.path?.match("view") !== null}>
 							<Graphic class="material-icons" aria-hidden="true"
@@ -74,20 +67,14 @@
 						<Separator nav />
 						<Subheader component={H6}>Settings</Subheader>
 						<Item activated={$page.path?.match("actions") !== null}>
-							<Graphic class="material-icons" aria-hidden="true"
-								>build</Graphic
-							>
+							<Graphic class="material-icons" aria-hidden="true">build</Graphic>
 							<Text>Actions</Text>
 						</Item>
 						<Item activated={$page.path?.match("config") !== null}>
-							<Graphic class="material-icons" aria-hidden="true"
-								>tune</Graphic
-							>
+							<Graphic class="material-icons" aria-hidden="true">tune</Graphic>
 							<Text>Config</Text>
 						</Item>
-						<Item
-							activated={$page.path?.match("settings") !== null}
-						>
+						<Item activated={$page.path?.match("settings") !== null}>
 							<Graphic class="material-icons" aria-hidden="true"
 								>settings</Graphic
 							>
@@ -97,9 +84,8 @@
 				</List>
 			</Content>
 		</Drawer>
-		<IconButton
-			class="material-icons close-btn"
-			on:click={() => (open = !open)}>chevron_left</IconButton
+		<IconButton class="material-icons close-btn" on:click={() => (open = !open)}
+			>chevron_left</IconButton
 		>
 	</div>
 {:else if ended}
@@ -108,9 +94,8 @@
 		in:fly={{ x: -200, duration: 500 }}
 		out:fly={{ x: 200, duration: 500 }}
 	>
-		<IconButton
-			class="material-icons open-btn"
-			on:click={() => (open = !open)}>chevron_right</IconButton
+		<IconButton class="material-icons open-btn" on:click={() => (open = !open)}
+			>chevron_right</IconButton
 		>
 	</div>
 {/if}

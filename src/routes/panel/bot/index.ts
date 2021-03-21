@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { dateDiffInHours } from "../../../helpers";
 import Bot, { IBot } from "../../../models/bot-model";
 
 export async function get(req: Request, res: Response, next: () => void) {
@@ -20,6 +21,15 @@ export async function put(req: Request, res: Response, next: () => void) {
 	if (body.username) update.username = body.username;
 	if (body._id) update._id = body._id;
 	if (body.actions) update.actions = body.actions;
+	if (body.endTime) {
+		if (dateDiffInHours(new Date(), new Date(body.endTime)) > 24) {
+			res.statusCode = 403;
+			res.end();
+		} else {
+			update.endTime = body.endTime;
+		}
+	}
+
 	if (Object.keys(update).length === 0) {
 		res.statusCode = 422;
 		res.end();

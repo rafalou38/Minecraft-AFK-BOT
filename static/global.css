@@ -6,6 +6,19 @@ body {
 	color: #333;
 }
 
+body,
+html{
+	min-height: 100vh;
+	min-width: 100vw;
+}
+
+html>
+body.scroll-lock
+{
+	position: fixed;
+}
+
+
 h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5em 0;
 	font-weight: 400;
