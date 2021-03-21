@@ -1,5 +1,5 @@
 console.log(
-	"\n".repeat(5) + "─".repeat(15) + "┤ app started ├" + "─".repeat(15)
+  "\n".repeat(5) + "─".repeat(15) + "┤ app started ├" + "─".repeat(15)
 );
 
 import * as sapper from "@sapper/server";
@@ -27,54 +27,54 @@ app.use(morgan("dev"));
 
 // TODO use mongo db for session => express-sessions
 app.use(
-	cookieSession({
-		maxAge: 7 * 24 * 60 * 60 * 1000,
-		keys: [session.cookieKey],
-	})
+  cookieSession({
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    keys: [session.cookieKey],
+  })
 );
 app.use(passport.initialize());
 app.use(passport.session());
 
 const redirects = [
-	[true, ["/auth/login", "/panel"]],
-	[false, ["/panel", "/auth/login"]],
+  [true, ["/auth/login", "/panel"]],
+  [false, ["/panel", "/auth/login"]],
 ];
 
 redirects.forEach((redir) => {
-	let [should_be_logged_in, urls] = redir;
+  let [should_be_logged_in, urls] = redir;
 
-	app.use(urls[0], (req, res, next) => {
-		if (should_be_logged_in && req.user) {
-			res.redirect(urls[1]);
-		} else if (!should_be_logged_in && !req.user) {
-			res.redirect(urls[1]);
-		} else {
-			next();
-		}
-	});
+  app.use(urls[0], (req, res, next) => {
+    if (should_be_logged_in && req.user) {
+      res.redirect(urls[1]);
+    } else if (!should_be_logged_in && !req.user) {
+      res.redirect(urls[1]);
+    } else {
+      next();
+    }
+  });
 });
 
 app.use("/api/auth", authRoutes);
 
 app.use(
-	compression({ threshold: 0 }),
-	sirv("static", { dev }),
-	sapper.middleware({
-		session: (req) => {
-			return { user_id: req?.user };
-		},
-	})
+  compression({ threshold: 0 }),
+  sirv("static", { dev }),
+  sapper.middleware({
+    session: (req) => {
+      return { user_id: req?.user };
+    },
+  })
 );
 
 connectMongoose
-	.then(() => {
-		app
-			.listen(PORT)
-			.on("error", (e) => {
-				console.log("Express error happened: ", e.message);
-			})
-			.on("listening", () => {
-				console.log(`app listening at http://localhost:${PORT} ✅`);
-			});
-	})
-	.catch();
+  .then(() => {
+    app
+      .listen(PORT)
+      .on("error", (e) => {
+        console.log("Express error happened: ", e.message);
+      })
+      .on("listening", () => {
+        console.log(`app listening at http://localhost:${PORT} ✅`);
+      });
+  })
+  .catch();

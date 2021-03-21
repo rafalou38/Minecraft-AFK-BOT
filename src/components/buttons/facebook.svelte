@@ -1,21 +1,21 @@
 <script>
-	import Logo from "../svgs/facebook-logo.svelte";
-	import BasicButton from "./basic_button.svelte";
-	export let href = undefined;
+  import Logo from "../svgs/facebook-logo.svelte";
+  import BasicButton from "./basic_button.svelte";
+  export let href = undefined;
 </script>
 
 <BasicButton
-	bg_color="#ffffff00"
-	{href}
-	color="#000000"
-	border="2px solid #8D8D8D"
+  bg_color="#ffffff00"
+  {href}
+  color="#000000"
+  border="2px solid #8D8D8D"
 >
-	<Logo />
-	<p>login with Facebook</p>
+  <Logo />
+  <p>login with Facebook</p>
 </BasicButton>
 
 <style>
-	p {
-		font-weight: 400;
-	}
+  p {
+    font-weight: 400;
+  }
 </style>
