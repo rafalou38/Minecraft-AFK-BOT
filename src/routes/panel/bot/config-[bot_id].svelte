@@ -6,6 +6,7 @@
 <script lang="ts">
 	import Button, { Label } from "@smui/button";
 	import Textfield from "@smui/textfield";
+	import HelperText from "@smui/textfield/helper-text/index";
 
 	import type { IBot } from "../../../models/bot-model";
 	import { botStore } from "../../_stores";
@@ -76,6 +77,9 @@
 		label="Password"
 		style="width: 100%;"
 	/>
+	<HelperText style="margin-top: -1em;"
+		>Leave empty for onlineMode=false server</HelperText
+	>
 	<Button
 		variant="raised"
 		style="
